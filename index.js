@@ -140,16 +140,16 @@ app.route("/")
 //find.ejs
 app.route("/find")
 .get(isAuth,function (req, res){
-  var ListItems = ["not"]
+  // var ListItems = ["not"]
   res.render("find");
 })
 .post(function (req, res){
   useremail=req.session.email;
   const {month} = req.body;
   // console.log(month);
-  month = MONTH.indexOf(month)
+  mnt = MONTH.indexOf(month)
 
-  var ML= findbyMonth(useremail,month)
+  var ML= findbyMonth(useremail,mnt)
   .then(data=>{
     // console.log(data);
     res.render("foundList",{ListItems:data,month:month});
