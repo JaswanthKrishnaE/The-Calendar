@@ -1,0 +1,64 @@
+<%- include("header") -%>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">The Calender</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/todaysList">Today's Events </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/addEvent">Add Event </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/find">Find<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Settings
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <div class="form-container" ">
+    <h3 style="text-align:center">Events of the "<%= month%>"</h3>
+
+    <div class="box">
+
+
+
+
+        <%  ListItems.forEach(function(item){ %>
+        <%   item.events.forEach(event=>{ %>
+        <form action="/delete" method="post">
+          <div class="item">
+            <input type="hidden" name="date" value=<%= item.date[0]%>>
+            <input type="hidden" name="month" value=<%= item.date[1]%>>
+            <input type="hidden" name="year" value=<%= item.date[2]%>>
+            <input type="text" name="delItem" value=<%= event %>>
+            <p class="description"><%= event %></p>
+            <div>
+            <h6><%= item.date[0]%>/<%= month %>/<%= item.date[2]%></h6>
+        </div>
+            <button class="" type="submit" name="list" >&#10060</button>
+          </div>
+          <input type="hidden" name="listName" ></input>
+        </form>
+        <%  }) %>
+        <%  }) %>
+      </div>
+
+
+
+
+  <%- include("footer") -%>

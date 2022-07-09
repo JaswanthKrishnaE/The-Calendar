@@ -1,0 +1,68 @@
+<%- include("header") -%>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">The Calender</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/todaysList">Today's Events </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/addEvent">Add Event </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/find">Find<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Settings
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Change Password</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <div class="form-container" ">
+    
+
+
+    <div class="container" style="height:220px;">
+
+        <form action="/find" method="post">
+<div>
+  <label for="month">Choose your browser from the list:</label>
+  <input list="months" name="month" id="month">
+  <datalist id="months">
+    <option value="Jan">
+      <option value="Feb">
+        <option value="Mar">
+          <option value="Apr">
+            <option value="May">
+              <option value="Jun">
+                <option value="Jul">
+                  <option value="Aug">
+                    <option value="Sep">
+                      <option value="Oct">
+                        <option value="Nov">
+                          <option value="Dec">
+                            
+                          </datalist>
+                          <div>
+</div>
+  <button type="submit" class="btn btn-primary">Add Event</button>
+</div>
+          </form>
+      </div>
+
+
+
+
+  <%- include("footer") -%>
