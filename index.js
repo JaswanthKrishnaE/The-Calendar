@@ -130,7 +130,7 @@ app.route("/login")
 
 
 //homePage.ejs
-app.route("/homepage")
+app.route("/")
 .get(function (req, res){
   res.render("homepage",{ currentDate: currentDate});
 })
@@ -222,6 +222,6 @@ app.route("/logout")
 })
 
 
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("listening on port");
   });
