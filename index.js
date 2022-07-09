@@ -222,6 +222,6 @@ app.route("/logout")
 })
 
 
-app.listen(process.ebv.PORT, function () {
+app.listen(process.env.PORT, function () {
     console.log("listening on port");
   });
