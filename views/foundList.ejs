@@ -39,22 +39,22 @@
 
 
         <%  ListItems.forEach(function(item){ %>
-        <%   item.events.forEach(event=>{ %>
-        <form action="/delete" method="post">
-          <div class="item">
-            <input type="hidden" name="date" value=<%= item.date[0]%>>
-            <input type="hidden" name="month" value=<%= item.date[1]%>>
-            <input type="hidden" name="year" value=<%= item.date[2]%>>
-            <input type="text" name="delItem" value=<%= event %> hidden="true">
-            <p class="description"><%= event %></p>
-            <div>
-            <h6><%= item.date[0]%>/<%= month %>/<%= item.date[2]%></h6>
-        </div>
-            <button class="" type="submit" name="list" >&#10060</button>
-          </div>
-          <input type="hidden" name="listName" ></input>
-        </form>
-        <%  }) %>
+            <%   for(var i=0; i <item.events.length; i++){ %>
+            <form action="/delete" method="post">
+              <div class="item">
+                <!-- //hidden -->
+                <input type="hidden" name="date" value=<%= item.date %> >
+                <input type="hidden" name="delItem" value=<%= i %> >
+    
+                <!-- //print -->
+                <p class="description"><%= item.events[i]  %></p>
+                  <div>
+                  <h6><%= item.date[0]%>/<%= month %>/<%= item.date[2]%></h6>
+                  </div>
+                <button class="" type="submit" name="list" >&#10060</button>
+              </div>
+            </form>
+        <%  } %>
         <%  }) %>
       </div>
 

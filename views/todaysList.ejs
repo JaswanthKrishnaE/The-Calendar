@@ -58,21 +58,22 @@
 
 
     <%  newList.forEach(function(item){ %>
-      <%   item.events.forEach(event=>{ %>
+        <%   for(var i=0; i <item.events.length; i++){ %>
         <form action="/delete" method="post">
           <div class="item">
-            <input type="hidden" name="date" value=<%= item.date[0]%>>
-            <input type="hidden" name="month" value=<%= item.date[1]%>>
-            <input type="hidden" name="year" value=<%= item.date[2]%>>
-            <input type="hidden" name="delItem" value=<%= event %>>
-            <p class="description"><%= event %></p>
-            <div>
-            <h6><%= item.date[0]%>/<%= month %>/<%= item.date[2]%></h6>
-        </div>
+            <!-- //hidden -->
+            <input type="hidden" name="date" value=<%= item.date %> >
+            <input type="hidden" name="delItem" value=<%= i %> >
+
+            <!-- //print -->
+            <p class="description"><%= item.events[i]  %></p>
+              <div>
+              <h6><%= item.date[0]%>/<%= month %>/<%= item.date[2]%></h6>
+              </div>
             <button class="" type="submit" name="list" >&#10060</button>
           </div>
         </form>
-    <%  }) %>
+    <%  } %>
     <%  }) %>
 
 

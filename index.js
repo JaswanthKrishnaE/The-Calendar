@@ -15,7 +15,8 @@ const {weeks,MONTH,currentDate} = require("./models/dateDetails.js");
 const {findingDataOfTheDay}=require("./main_functions/fetch.js");
 const {updateOrAddEvents} =  require("./main_functions/update.js");
 const {deleteEvent}=  require("./main_functions/delete.js");
-const {findbyMonth}=require("./main_functions/findList.js")
+const {findbyMonth}=require("./main_functions/findList.js");
+const {fetchArray} = require("./main_functions/fetchArray.js");
 
 
 //main contet
@@ -35,7 +36,7 @@ const store = new MongoDBSession({
   })
 
   app.use(session({
-    secret: 'u need to do something',
+    secret: process.env['SESSION_SECRET'],
     resave: false,
     saveUninitialized: false,
     store:store,
@@ -202,11 +203,20 @@ updateOrAddEvents(userEmail,reqDate,newItem);
 app.route("/delete")
 .post(function (req, res) {
   userEmail=req.session.email;
-  const{date,month,year, delItem} = req.body;
-  reqDate=[Number(date),Number(month),Number(year)];
-    // console.log(reqDate);
-    // console.log(delItem);
-  deleteEvent(userEmail,reqDate,delItem);
+  const{date, delItem} = req.body;
+  // console.log(date)
+  const reqDate = (date.split(',')).map(Number);
+  console.log(reqDate);
+  console.log(delItem);
+fetchArray(userEmail,reqDate)
+  .then(data=>{
+console.log(data[delItem]);
+deleteEvent(userEmail,reqDate,data[delItem]);
+  })
+  .catch(err=>{
+    console.log(err);
+  });
+
   res.redirect("/todaysList");
 })
 
