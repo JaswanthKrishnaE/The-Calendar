@@ -13,7 +13,7 @@ const {connectDB} = require("./models/connect.js");
 const {User} = require("./models/user.js");
 const {weeks,MONTH,currentDate} = require("./models/dateDetails.js");
 const {findingDataOfTheDay}=require("./main_functions/fetch.js");
-const {updateOrAddEvents} =  require("./main_functions/update.js");
+const {updateOraddevents} =  require("./main_functions/update.js");
 const {deleteEvent}=  require("./main_functions/delete.js");
 const {findbyMonth}=require("./main_functions/findList.js");
 const {fetchArray} = require("./main_functions/fetchArray.js");
@@ -57,7 +57,7 @@ app.route("/login")
   .get(function (req, res) {
     if(req.session.isAuth){
       month=MONTH[currentDate[1]];
-      res.render("/todaysList",{ currentDate: currentDate,month:month})
+      res.render("/todayslist",{ currentDate: currentDate,month:month})
     }
     res.render("login",{ currentDate: currentDate});
   })
@@ -74,15 +74,15 @@ app.route("/login")
         }else{
             req.session.isAuth= true;
             req.session.email = email;
-            res.redirect("/todaysList")
+            res.redirect("/todayslist")
         }
     }
 
     });
 
 
- //todaysList.ejs
-  app.route("/todaysList")
+ //todayslist.ejs
+  app.route("/todayslist")
   .get(isAuth,  function (req, res) {
     var date=[currentDate[0],currentDate[1],currentDate[2]];
     var useremail = req.session.email;
@@ -91,7 +91,7 @@ app.route("/login")
 .then(data=>{
     // console.log(data);
     var month = MONTH[date[1]]
-    res.render("todaysList",{ currentDate: currentDate,newList:data,month:month});
+    res.render("todayslist",{ currentDate: currentDate,newList:data,month:month});
 
 })
 .catch(err=>console.log(err));
@@ -102,10 +102,10 @@ app.route("/login")
 
 
 ////signup.ejs
-  app.route("/Signup")
+  app.route("/signup")
   .get(function (req, res) {
     if(req.session.isAuth){
-      res.redirect("/todaysList")
+      res.redirect("/todayslist")
     }
         res.render("signup",{ currentDate: currentDate});
   })
@@ -130,10 +130,10 @@ app.route("/login")
 
 
 
-//homePage.ejs
+//homepage.ejs
 app.route("/")
 .get(function (req, res){
-  res.render("homePage",{ currentDate: currentDate});
+  res.render("homepage",{ currentDate: currentDate});
 })
 
 
@@ -164,10 +164,10 @@ app.route("/find")
 
 
 
-//addEvent.ejs
-app.route("/addEvent")
+//addevent.ejs
+app.route("/addevent")
 .get(isAuth,function (req, res){
-  res.render("addEvent");
+  res.render("addevent");
 })
 .post(function (req, res){
   userEmail=req.session.email;
@@ -179,8 +179,8 @@ app.route("/addEvent")
     var date = eventdate.split("-")
     newDate=[date[2]-0,date[1]-1,date[0]-0];
   console.log(newDate);
-  updateOrAddEvents(userEmail,newDate,event);
-  res.redirect("/addEvent")
+  updateOraddevents(userEmail,newDate,event);
+  res.redirect("/addevent")
 });
 
 
@@ -193,8 +193,8 @@ app.route("/update")
   reqDate=[Number(date),Number(month),Number(year)];
   // console.log(newItem);
   // console.log(reqDate);
-updateOrAddEvents(userEmail,reqDate,newItem);
-  res.redirect("/todaysList");
+updateOraddevents(userEmail,reqDate,newItem);
+  res.redirect("/todayslist");
 
 })
 
@@ -217,7 +217,7 @@ deleteEvent(userEmail,reqDate,data[delItem]);
     console.log(err);
   });
 
-  res.redirect("/todaysList");
+  res.redirect("/todayslist");
 })
 
 
