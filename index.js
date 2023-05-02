@@ -20,7 +20,7 @@ const {fetchArray} = require("./main_functions/fetchArray.js");
 
 
 //main contet
-var port = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 const app = express();
@@ -232,6 +232,10 @@ app.route("/logout")
 })
 
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log("listening on port");
-  });
+// app.listen( 3000, function () {
+//     console.log("listening on port" + 3000);
+//   });
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+})
