@@ -133,7 +133,7 @@ app.route("/login")
 //homepage.ejs
 app.route("/")
 .get(function (req, res){
-  res.render("homepage",{ currentDate: currentDate});
+  res.render("homepage.ejs",{ currentDate: currentDate});
 })
 
 
