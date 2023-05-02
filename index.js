@@ -133,7 +133,7 @@ app.route("/login")
 //homepage.ejs
 app.route("/")
 .get(function (req, res){
-  res.render("homepage.ejs",{ currentDate: currentDate});
+  res.render("login",{ currentDate: currentDate});
 })
 
 
@@ -230,11 +230,6 @@ app.route("/logout")
   })
   res.redirect("/login")
 })
-
-
-// app.listen( 3000, function () {
-//     console.log("listening on port" + 3000);
-//   });
 
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
