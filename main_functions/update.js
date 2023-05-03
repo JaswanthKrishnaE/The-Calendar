@@ -4,7 +4,7 @@ const {User} = require(".././models/user.js");
 
 
 
-function updateOrAddEvents(useremail,date,event){
+const updateOrAddEvents = async(useremail,date,event)=>{
 
       //add date and eventsto the user's data  
       const addDateEvent=async()=>{
@@ -62,4 +62,4 @@ function updateOrAddEvents(useremail,date,event){
 
 
 // updateOrAddEvents(useremail, currentDate,event);
-module.exports={updateOrAddEvents};
+module.exports = {updateOrAddEvents};
