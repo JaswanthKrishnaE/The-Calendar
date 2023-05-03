@@ -186,17 +186,13 @@ app.route("/addevent")
 
 
 //update user data
-app.route("/update")
-.post(function (req, res) {
-  userEmail=req.session.email;
-  const{date,month,year, newItem} = req.body;
-  reqDate=[Number(date),Number(month),Number(year)];
-  // console.log(newItem);
-  // console.log(reqDate);
-updateOraddevents(userEmail,reqDate,newItem);
-  res.redirect("/todayslist");
-
-})
+app.route("/update").post(function (req, res) {
+    userEmail=req.session.email;
+    const{date,month,year, newItem} = req.body;
+    reqDate=[Number(date),Number(month),Number(year)];
+    updateOraddevents(userEmail,reqDate,newItem);
+    res.redirect("/todayslist");
+});
 
 
 ///delete.js
@@ -208,14 +204,14 @@ app.route("/delete")
   const reqDate = (date.split(',')).map(Number);
   console.log(reqDate);
   console.log(delItem);
-fetchArray(userEmail,reqDate)
-  .then(data=>{
-console.log(data[delItem]);
-deleteEvent(userEmail,reqDate,data[delItem]);
-  })
-  .catch(err=>{
-    console.log(err);
-  });
+  fetchArray(userEmail,reqDate)
+    .then(data=>{
+    console.log(data[delItem]);
+    deleteEvent(userEmail,reqDate,data[delItem]);
+    })
+    .catch(err=>{
+      console.log(err);
+    });
 
   res.redirect("/todayslist");
 })
