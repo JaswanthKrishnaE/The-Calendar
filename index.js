@@ -13,7 +13,7 @@ const {connectDB} = require("./models/connect.js");
 const {User} = require("./models/user.js");
 const {weeks,MONTH,currentDate} = require("./models/dateDetails.js");
 const {findingDataOfTheDay}=require("./main_functions/fetch.js");
-const {updateOraddevents} =  require("./main_functions/update.js");
+const {updateOrAddEvents} =  require("./main_functions/update.js");
 const {deleteEvent}=  require("./main_functions/delete.js");
 const {findbyMonth}=require("./main_functions/findList.js");
 const {fetchArray} = require("./main_functions/fetchArray.js");
@@ -179,7 +179,7 @@ app.route("/addevent")
     var date = eventdate.split("-")
     newDate=[date[2]-0,date[1]-1,date[0]-0];
   console.log(newDate);
-  updateOraddevents(userEmail,newDate,event);
+  updateOrAddEvents(userEmail,newDate,event);
   res.redirect("/addevent")
 });
 
@@ -190,7 +190,7 @@ app.route("/update").post(function (req, res) {
     userEmail=req.session.email;
     const{date,month,year, newItem} = req.body;
     reqDate=[Number(date),Number(month),Number(year)];
-    updateOraddevents(userEmail,reqDate,newItem);
+    updateOrAddEvents(userEmail,reqDate,newItem);
     res.redirect("/todayslist");
 });
 

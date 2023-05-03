@@ -4,32 +4,31 @@ const {User} = require(".././models/user.js");
 
 
 
-const updateOrAddEvents = async(useremail,date,event)=>{
+function updateOrAddEvents(useremail,date,event){
 
-      //add date and eventsto the user's data  
-      const addDateEvent=async()=>{
-        try{
-          var result = await User
-            .findOneAndUpdate({email: useremail}, 
-              {$push: {eventDate: {date: date, events: [event]}}},
-              {safe: true, upsert: true});
-          console.log("Event and date added to users DB: "+result);
-          }catch(err){
-          console.log("Error in addind evet and date to user's database"+err);
-        }
-      };
-      
-      //add sigle to the esisting date of the user to dB
-      const addEvent= async()=>{
-        try{
-          var result = await User
-          .findOneAndUpdate({email:useremail,"eventDate.date":date},
-          {$push : {"eventDate.$.events":event}});
-          console.log("Added event to date: "+result);
-        }catch(err){
-          console.log("Error in adding the event to existing date in user db:" + err);
-        }
-      }
+  //add date and eventsto the user's data  
+  const addDateEvent=async()=>{
+    try{
+      var result = await User
+        .findOneAndUpdate({email: useremail}, 
+          {$push: {eventDate: {date: date, events: [event]}}},
+          {safe: true, upsert: true});
+      console.log("Event and date added to users DB: "+result);
+      }catch(err){
+      console.log("Error in addind evet and date to user's database"+err);
+    }
+  };
+  //add sigle to the esisting date of the user to dB
+const addEvent= async()=>{
+  try{
+    var result = await User
+    .findOneAndUpdate({email:useremail,"eventDate.date":date},
+    {$push : {"eventDate.$.events":event}});
+    console.log("Added event to date: "+result);
+  }catch(err){
+    console.log("Error in adding the event to exiating date in user db:" + err);
+  }
+}
 
 
 
@@ -62,4 +61,4 @@ const updateOrAddEvents = async(useremail,date,event)=>{
 
 
 // updateOrAddEvents(useremail, currentDate,event);
-module.exports = {updateOrAddEvents};
+module.exports={updateOrAddEvents};
