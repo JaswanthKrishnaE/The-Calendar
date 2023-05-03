@@ -28,12 +28,6 @@ try{
 
 
 
-
-   
-
-
-
-
 }catch(err){
     console.log("error deleting event from the date :"+err)
 }
